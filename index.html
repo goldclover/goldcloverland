@@ -1,180 +1,189 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GOLD GLOWER - Super Bono Exclusivo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Glover - Súper Bono Exclusivo</title>
   <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
     body {
-      font-family: 'Arial Black', sans-serif;
-      background: radial-gradient(circle at top, #111 0%, #000 100%);
-      color: #fff;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f0f0f, #1c1c1c);
+      color: white;
+      text-align: center;
       overflow-x: hidden;
     }
+
+    /* Título */
     h1 {
-      font-size: 3rem;
-      text-align: center;
+      font-size: 2.5em;
       margin: 20px 0;
       color: gold;
-      text-shadow: 0 0 5px #ff0, 0 0 10px #ff8800; /* glow reducido */
+      text-shadow: 0 0 8px rgba(255,215,0,0.7), 0 0 15px rgba(255,215,0,0.5);
     }
-    .banner {
-      background: linear-gradient(45deg, #ff0000, #ff8800);
-      text-align: center;
-      padding: 10px;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
+
+    /* Cuadro Bono */
     .bonus-box {
-      margin: 20px auto;
-      padding: 20px;
-      background: #222;
-      border: 2px solid gold;
+      background: rgba(255, 0, 0, 0.8);
+      margin: 15px auto;
+      padding: 15px;
       border-radius: 12px;
-      max-width: 600px;
+      font-size: 1.3em;
+      font-weight: bold;
+      max-width: 500px;
       display: flex;
       flex-direction: column;
+      gap: 8px;
+    }
+    .bonus-emojis {
+      font-size: 1.5em;
+    }
+
+    /* Botón WhatsApp */
+    .whatsapp-btn {
+      display: inline-flex;
       align-items: center;
-      text-align: center;
-    }
-    .bonus-box span.emoji {
-      font-size: 2rem;
-      margin: 5px 0;
-      display: block;
-    }
-    .bonus-box p {
-      font-size: 1.3rem;
-      line-height: 1.5;
-    }
-    .cta {
-      display: block;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(45deg, #ff0000, #cc0000);
+      color: white;
+      font-size: 1.2em;
+      padding: 14px 24px;
+      margin: 20px auto;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+      box-shadow: 0 0 10px rgba(255,0,0,0.6);
       width: 90%;
       max-width: 400px;
-      margin: 20px auto;
-      padding: 15px 20px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      text-align: center;
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      background: linear-gradient(45deg, #ff0000, #ff8800);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      transition: transform 0.2s ease;
     }
-    .cta:hover { transform: scale(1.05); }
-    .cta svg {
-      vertical-align: middle;
-      margin-right: 8px;
-      height: 22px;
-      width: 22px;
-      fill: #fff;
+    .whatsapp-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,0,0,0.9);
     }
+
+    /* Ganadores */
     .winners {
-      position: fixed;
-      bottom: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
+      margin: 25px auto;
+      max-width: 500px;
+      text-align: left;
+    }
+    .winner {
       opacity: 0;
-      transition: all 0.8s ease;
-      font-size: 0.9rem;
+      transform: translateY(20px);
+      background: rgba(255,255,255,0.1);
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 8px;
+      animation: fadeInUp 0.6s forwards;
     }
-    .winners.show {
-      bottom: 30px;
-      opacity: 1;
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    canvas {
+
+    /* Partículas */
+    .particle {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 6s infinite linear;
     }
-    @media(max-width:480px) {
-      h1 { font-size: 2rem; }
-      .bonus-box { width: 95%; padding: 15px; }
-      .bonus-box p { font-size: 1.1rem; }
-      .cta { font-size: 1.1rem; padding: 12px 16px; }
+    @keyframes float {
+      from { transform: translateY(100vh) scale(1); }
+      to { transform: translateY(-10vh) scale(0.5); }
+    }
+
+    /* Responsivo */
+    @media (max-width: 480px) {
+      h1 { font-size: 2em; }
+      .bonus-box { font-size: 1.1em; padding: 12px; }
+      .bonus-emojis { font-size: 1.3em; }
+      .whatsapp-btn { font-size: 1em; padding: 12px 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="banner">⏳ ¡Último día! Oferta expira en 24 horas ⏳</div>
+
   <h1>GOLD GLOWER</h1>
 
   <div class="bonus-box">
-    <span class="emoji">🎉</span>
-    <p><strong>SUPER BONO EXCLUSIVO</strong><br> Duplica tu primera carga y obtené más oportunidades de ganar 💰</p>
-    <span class="emoji">🎊</span>
+    <div class="bonus-emojis">🎉💰🎊</div>
+    <div>¡SÚPER BONO EXCLUSIVO SOLO POR HOY!</div>
   </div>
 
-  <button class="cta" onclick="goWhatsApp()">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 .5C7.453.5.5 7.453.5 16c0 2.805.73 5.535 2.117 7.945L.5 31.5l7.77-2.055A15.442 15.442 0 0016 31.5c8.547 0 15.5-6.953 15.5-15.5S24.547.5 16 .5zm0 28c-2.59 0-5.117-.684-7.33-1.98l-.523-.309-4.605 1.219 1.23-4.488-.34-.547A12.945 12.945 0 013 16c0-7.18 5.82-13 13-13s13 5.82 13 13-5.82 13-13 13zm7.332-9.355c-.402-.199-2.367-1.168-2.73-1.297-.363-.133-.629-.199-.898.199-.266.398-1.031 1.297-1.266 1.562-.234.266-.465.299-.867.1-.398-.199-1.684-.621-3.207-1.98-1.184-1.059-1.98-2.367-2.215-2.766-.234-.398-.027-.613.172-.812.176-.176.398-.465.598-.699.199-.234.266-.398.398-.664.133-.266.066-.5-.033-.699-.098-.199-.898-2.16-1.23-2.961-.324-.793-.66-.684-.898-.699-.234-.012-.5-.016-.766-.016s-.699.1-1.066.5c-.363.398-1.402 1.371-1.402 3.34s1.434 3.867 1.633 4.133c.199.266 2.82 4.309 6.84 6.039.957.414 1.703.664 2.285.852.957.305 1.828.262 2.516.16.77-.115 2.367-.965 2.699-1.898.332-.934.332-1.734.234-1.898-.098-.16-.367-.262-.77-.461z"/></svg>
+  <a href="https://wa.me/5491125459137" class="whatsapp-btn" id="whatsappBtn">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+         alt="WhatsApp" style="width:24px;height:24px;"> 
     OBTENER BONO AHORA
-  </button>
+  </a>
 
-  <div id="winner" class="winners">¡Juan de Córdoba acaba de ganar $5,000!</div>
+  <div class="winners" id="winners"></div>
 
-  <canvas id="particles"></canvas>
-
+  <!-- Partículas -->
   <script>
-    // WhatsApp redirect + Meta Pixel Lead event
-    function goWhatsApp() {
-      fbq('track', 'Lead');
-      window.location.href = "https://wa.me/5491123456789?text=¡Quiero%20mi%20bono!";
+    for (let i = 0; i < 25; i++) {
+      let p = document.createElement("div");
+      p.className = "particle";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(p);
     }
+  </script>
 
-    // Meta Pixel
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];t=b.createElement(e);
-    t.async=!0; t.src=v; s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'TU_PIXEL_ID');
+  <!-- Ganadores -->
+  <script>
+    const winnersData = [
+      "Carlos ganó $2000 🎉",
+      "María obtuvo $5000 💰",
+      "José se llevó $3500 🔥",
+      "Ana ganó $4200 🎊"
+    ];
+    const winnersContainer = document.getElementById("winners");
+    let index = 0;
+    function showWinner() {
+      let div = document.createElement("div");
+      div.className = "winner";
+      div.textContent = winnersData[index % winnersData.length];
+      winnersContainer.appendChild(div);
+      index++;
+      setTimeout(() => { if (div) div.remove(); }, 6000);
+    }
+    setInterval(showWinner, 2500);
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e);t.async=!0;
+      t.src=v;
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'TU_PIXEL_ID'); 
     fbq('track', 'PageView');
     fbq('track', 'ViewContent');
-
-    // Ganadores dinámicos
-    const winners = [
-      "¡Ana de Rosario ganó $10,000!",
-      "¡Luis de Mendoza ganó $7,500!",
-      "¡Carla de Salta ganó $12,000!",
-      "¡Pedro de Córdoba ganó $6,000!"
-    ];
-    let winBox = document.getElementById("winner");
-    setInterval(() => {
-      winBox.textContent = winners[Math.floor(Math.random()*winners.length)];
-      winBox.classList.add("show");
-      setTimeout(()=>winBox.classList.remove("show"), 4000);
-    }, 6000);
-
-    // Partículas reducidas
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    let w,h,particles=[];
-    function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
-    window.addEventListener("resize", resize);resize();
-    for(let i=0;i<25;i++){particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5),vy:(Math.random()-0.5),r:Math.random()*2+1});}
-    function draw(){
-      ctx.clearRect(0,0,w,h);
-      ctx.fillStyle="rgba(255,255,255,0.7)";
-      particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-        p.x+=p.vx; p.y+=p.vy;
-        if(p.x<0||p.x>w) p.vx*=-1;
-        if(p.y<0||p.y>h) p.vy*=-1;
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
+    document.getElementById("whatsappBtn").addEventListener("click", () => {
+      fbq('track', 'Lead');
+    });
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" 
+         src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"/>
+  </noscript>
+
 </body>
 </html>

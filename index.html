@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Glower - ¡Obtén tu Bono Ahora!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fondo animado con gradiente más oscuro */
+        .background {
+            background: linear-gradient(45deg, #1a0b2e, #2d1b4e, #3f2860, #4a1c5c);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Partículas doradas flotantes */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Título principal con efecto dorado */
+        .title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 
+                0 0 10px #ffd700,
+                0 0 20px #ffd700,
+                0 0 30px #ffd700,
+                2px 2px 4px rgba(0,0,0,0.5);
+            margin: 60px 0 40px 0;
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        .title::before {
+            content: '🍀';
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: rotate 3s linear infinite;
+        }
+
+        .title::after {
+            content: '🍀';
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: rotate 3s linear infinite reverse;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); }
+            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffed4e, 0 0 40px #ffed4e, 2px 2px 4px rgba(0,0,0,0.5); }
+        }
+
+        @keyframes rotate {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* Sección central */
+        .middle-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Descripción más llamativa */
+        .description {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #fff, #ffd700, #ffed4e, #fff);
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate;
+            margin: 40px 0;
+            font-weight: 800;
+            line-height: 1.3;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            position: relative;
+        }
+
+        .description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            border-radius: 15px;
+            z-index: -1;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3); }
+            to { text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Botón principal con efectos llamativos */
+        .cta-button {
+            background: linear-gradient(45deg, #00ff00, #32cd32, #00ff00);
+            background-size: 200% 200%;
+            border: none;
+            padding: 25px 60px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #000;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 
+                0 8px 20px rgba(0,255,0,0.4),
+                inset 0 2px 4px rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite, gradientMove 3s ease infinite;
+            position: relative;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translate(-200%, -200%); }
+            50% { transform: rotate(45deg) translate(0%, 0%); }
+            100% { transform: rotate(45deg) translate(200%, 200%); }
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 12px 30px rgba(0,255,0,0.6),
+                inset 0 2px 4px rgba(255,255,255,0.4);
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Verificación de plataforma */
+        .verification {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .verification::before,
+        .verification::after {
+            content: '✅';
+            margin: 0 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Notificaciones de ganador - posicionadas relativamente */
+        .winner-notification {
+            position: relative;
+            left: -400px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.95));
+            padding: 15px 20px;
+            border-radius: 15px;
+            max-width: 300px;
+            width: 100%;
+            border: 2px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(255,215,0,0.3);
+            backdrop-filter: blur(10px);
+            animation: slideInOutRelative 6s ease-in-out;
+            margin: 10px 0;
+        }
+
+        @keyframes slideInOutRelative {
+            0% { left: -400px; opacity: 0; }
+            15% { left: 0px; opacity: 1; }
+            85% { left: 0px; opacity: 1; }
+            100% { left: -400px; opacity: 0; }
+        }
+
+        .notification-container {
+            width: 100%;
+            max-width: 350px;
+            margin: 15px auto;
+            overflow: hidden;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .notification-icon {
+            width: 25px;
+            height: 25px;
+            background: #00ff00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .notification-title {
+            color: #00ff00;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .notification-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .notification-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .notification-details h3 {
+            color: #ffd700;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .notification-amount {
+            color: #00ff00;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0,255,0,0.5);
+        }
+
+        .notification-location {
+            color: #ccc;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        /* Logo de WhatsApp mejorado */
+        .whatsapp-logo {
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            animation: whatsappPulse 2s infinite, whatsappFloat 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.6), 0 0 40px rgba(37, 211, 102, 0.3);
+            z-index: 5;
+        }
+
+        @keyframes whatsappPulse {
+            0%, 100% { 
+                transform: translateY(-50%) scale(1);
+                box-shadow: 0 0 20px rgba(37, 211, 102, 0.6), 0 0 40px rgba(37, 211, 102, 0.3);
+            }
+            50% { 
+                transform: translateY(-50%) scale(1.15);
+                box-shadow: 0 0 30px rgba(37, 211, 102, 0.8), 0 0 60px rgba(37, 211, 102, 0.5);
+            }
+        }
+
+        @keyframes whatsappFloat {
+            0%, 100% { transform: translateY(-50%) translateX(0px); }
+            50% { transform: translateY(-50%) translateX(10px); }
+        }
+
+        /* Ondas de WhatsApp */
+        .whatsapp-waves {
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+        }
+
+        .whatsapp-waves::before,
+        .whatsapp-waves::after {
+            content: '';
+            position: absolute;
+            border: 2px solid rgba(37, 211, 102, 0.5);
+            border-radius: 50%;
+            animation: whatsappRipple 2s infinite;
+        }
+
+        .whatsapp-waves::before {
+            width: 60px;
+            height: 60px;
+            left: -10px;
+            top: -10px;
+        }
+
+        .whatsapp-waves::after {
+            width: 80px;
+            height: 80px;
+            left: -20px;
+            top: -20px;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes whatsappRipple {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Sección de bono exclusivo */
+        .bonus-section {
+            background: linear-gradient(135deg, #ff4757, #ff6b7a);
+            padding: 40px 20px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-section::before {
+            content: '🎉';
+            position: absolute;
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+            top: 20px;
+            left: 20px;
+        }
+
+        .bonus-section::after {
+            content: '🎉';
+            position: absolute;
+            font-size: 3rem;
+            animation: bounce 2s infinite 0.5s;
+            top: 20px;
+            right: 20px;
+        }
+
+        .bonus-header {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .bonus-percentage {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        .bonus-description {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Responsivo mejorado */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .title {
+                font-size: 2.8rem;
+                margin: 30px 0 25px 0;
+                letter-spacing: 2px;
+            }
+
+            .title::before,
+            .title::after {
+                display: none;
+            }
+
+            .description {
+                font-size: 1.5rem;
+                margin: 25px 0;
+                padding: 0 10px;
+                line-height: 1.4;
+            }
+
+            .cta-button {
+                padding: 18px 35px;
+                font-size: 1.3rem;
+                margin: 25px 0;
+                letter-spacing: 1px;
+            }
+
+            .whatsapp-logo {
+                left: -50px;
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+            }
+
+            .whatsapp-waves::before {
+                width: 50px;
+                height: 50px;
+                left: -7px;
+                top: -7px;
+            }
+
+            .whatsapp-waves::after {
+                width: 65px;
+                height: 65px;
+                left: -15px;
+                top: -15px;
+            }
+
+            .verification {
+                font-size: 1rem;
+                margin: 15px 0;
+            }
+
+            .winner-notification {
+                max-width: 280px;
+                padding: 12px 15px;
+                margin: 8px 0;
+            }
+
+            .notification-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+
+            .notification-details h3 {
+                font-size: 0.9rem;
+            }
+
+            .notification-amount {
+                font-size: 1rem;
+            }
+
+            .notification-location {
+                font-size: 0.75rem;
+            }
+
+            .bonus-section {
+                padding: 30px 15px;
+                margin-top: 30px;
+            }
+
+            .bonus-percentage {
+                font-size: 3.5rem;
+            }
+
+            .bonus-header {
+                font-size: 1.3rem;
+            }
+
+            .bonus-description {
+                font-size: 1.1rem;
+            }
+
+            .particles {
+                opacity: 0.7;
+            }
+
+            .particle {
+                width: 3px;
+                height: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.3rem;
+                margin: 25px 0 20px 0;
+            }
+
+            .description {
+                font-size: 1.3rem;
+                margin: 20px 0;
+            }
+
+            .cta-button {
+                padding: 16px 30px;
+                font-size: 1.2rem;
+                width: calc(100% - 30px);
+                max-width: 300px;
+            }
+
+            .whatsapp-logo {
+                left: -45px;
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+
+            .winner-notification {
+                max-width: 250px;
+                padding: 10px 12px;
+            }
+
+            .bonus-percentage {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="particles" id="particles"></div>
+        
+        <div class="container">
+            <!-- Título principal -->
+            <h1 class="title">GOLD GLOWER</h1>
+            
+            <div class="middle-section">
+                <!-- Descripción -->
+                <p class="description">
+                    Escríbenos por WhatsApp<br>
+                    apretando el botón de abajo
+                </p>
+
+                <!-- Botón principal -->
+                <button class="cta-button" onclick="redirectToWhatsApp()" style="position: relative;">
+                    <div class="whatsapp-waves"></div>
+                    <div class="whatsapp-logo">📱</div>
+                    OBTENER BONO AHORA
+                </button>
+
+                <!-- Verificación -->
+                <div class="verification">
+                    Plataforma Verificada
+                </div>
+
+                <!-- Notificaciones de ganadores -->
+                <div class="notification-container">
+                    <div id="winner-notifications"></div>
+                </div>
+            </div>
+
+            <!-- Sección de bono exclusivo -->
+            <div class="bonus-section">
+                <div class="bonus-header">🏆 SUPER BONO EXCLUSIVO 🏆</div>
+                <div class="bonus-percentage">50%</div>
+                <div class="bonus-description">BONIFICADO EN TU PRIMER DEPÓSITO</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Meta Pixel Code - REEMPLAZA 'YOUR_PIXEL_ID' con tu ID real
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        fbq('init', 'YOUR_PIXEL_ID'); // REEMPLAZA con tu Pixel ID
+        fbq('track', 'PageView');
+
+        // Datos de ganadores ficticios para las notificaciones
+        const winners = [
+            { name: "María González", amount: "$45,230", location: "Buenos Aires", avatar: "👩" },
+            { name: "Carlos Mendoza", amount: "$67,890", location: "Córdoba", avatar: "👨" },
+            { name: "Ana Rodríguez", amount: "$23,450", location: "Rosario", avatar: "👩" },
+            { name: "Diego López", amount: "$89,120", location: "Mendoza", avatar: "👨" },
+            { name: "Laura Martín", amount: "$34,670", location: "La Plata", avatar: "👩" },
+            { name: "Roberto Silva", amount: "$56,340", location: "Tucumán", avatar: "👨" },
+            { name: "Patricia Morales", amount: "$78,210", location: "Salta", avatar: "👩" },
+            { name: "Fernando Castro", amount: "$42,580", location: "Mar del Plata", avatar: "👨" },
+            { name: "Gabriela Ruiz", amount: "$91,760", location: "Santa Fe", avatar: "👩" },
+            { name: "Miguel Torres", amount: "$38,940", location: "Neuquén", avatar: "👨" }
+        ];
+
+        let currentWinnerIndex = 0;
+
+        // Función para mostrar notificaciones de ganadores
+        function showWinnerNotification() {
+            const winner = winners[currentWinnerIndex];
+            const notification = document.createElement('div');
+            notification.className = 'winner-notification';
+            
+            notification.innerHTML = `
+                <div class="notification-header">
+                    <div class="notification-icon">🎉</div>
+                    <div class="notification-title">¡Nuevo Ganador!</div>
+                </div>
+                <div class="notification-info">
+                    <div class="notification-avatar">${winner.avatar}</div>
+                    <div class="notification-details">
+                        <h3>${winner.name}</h3>
+                        <div class="notification-amount">🏆 Ganó ${winner.amount}</div>
+                        <div class="notification-location">📍 ${winner.location}</div>
+                    </div>
+                </div>
+            `;
+
+            const container = document.getElementById('winner-notifications');
+            container.appendChild(notification);
+
+            // Remover la notificación después de la animación
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 6000);
+
+            // Siguiente ganador
+            currentWinnerIndex = (currentWinnerIndex + 1) % winners.length;
+        }
+
+        // Crear partículas doradas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Función para redirigir a WhatsApp con tracking de Meta Pixel
+        function redirectToWhatsApp() {
+            // TRACKING DE META PIXEL - Evento de conversión
+            fbq('track', 'Lead', {
+                content_name: 'Gold Glower Bonus',
+                content_category: 'Gaming/Casino',
+                value: 50.00,
+                currency: 'USD'
+            });
+
+            // También trackear como evento personalizado
+            fbq('trackCustom', 'BotonObtenerBono', {
+                source: 'landing_page',
+                bonus_type: '50_percent_deposit'
+            });
+
+            // Cambia este número por el número de WhatsApp al que quieres redirigir
+            const phoneNumber = "+5491123456789"; // Formato internacional
+            const message = "¡Hola! Quiero obtener mi bono del 50% de Gold Glower 🍀💰";
+            const whatsappURL = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+            
+            // Agregar efecto de clic
+            const button = document.querySelector('.cta-button');
+            button.style.transform = 'scale(0.9)';
+            
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+                button.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Inicializar cuando se carga la página
+        window.addEventListener('load', () => {
+            createParticles();
+            
+            // Mostrar primera notificación después de 3 segundos
+            setTimeout(showWinnerNotification, 3000);
+            
+            // Mostrar notificaciones cada 8 segundos
+            setInterval(showWinnerNotification, 8000);
+            
+            // Agregar más partículas cada 10 segundos
+            setInterval(() => {
+                const existingParticles = document.querySelectorAll('.particle');
+                if (existingParticles.length < 30) {
+                    createParticles();
+                }
+            }, 10000);
+        });
+
+        // Efectos de hover mejorados
+        document.querySelector('.cta-button').addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 12px 30px rgba(0,255,0,0.6), inset 0 2px 4px rgba(255,255,255,0.4)';
+        });
+
+        document.querySelector('.cta-button').addEventListener('mouseleave', function() {
+            this.style.boxShadow = '0 8px 20px rgba(0,255,0,0.4), inset 0 2px 4px rgba(255,255,255,0.3)';
+        });
+    </script>
+
+    <!-- Meta Pixel Noscript -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
+</body>
+</html>

@@ -14,46 +14,190 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
     height:100vh;
-    position:relative;
-    overflow:hidden; /* evita scroll por partículas */
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    overflow:hidden;
+    z-index:1;
 }
 @keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 
-/* Partículas doradas */
-.particles { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; }
-.particle { position:absolute; width:4px; height:4px; background: linear-gradient(45deg,#ffd700,#ffed4e); border-radius:50%; animation: float 6s infinite linear; opacity:0.8; }
-@keyframes float { 0% { transform:translateY(100%) rotate(0deg); opacity:0; } 10% { opacity:0.8; } 90% { opacity:0.8; } 100% { transform:translateY(-10%) rotate(360deg); opacity:0; } }
+/* Partículas doradas optimizadas */
+.particles { 
+    position:fixed; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100vh; 
+    pointer-events:none; 
+    overflow:hidden;
+    z-index:2;
+}
+.particle { 
+    position:absolute; 
+    width:3px; 
+    height:3px; 
+    background: #ffd700; 
+    border-radius:50%; 
+    opacity:0;
+    will-change: transform, opacity;
+}
 
-/* Contenedor principal sin scroll */
-.container { position:relative; z-index:10; padding:10px 20px; text-align:center; height:calc(100vh - 140px); display:flex; flex-direction:column; justify-content:space-between; }
+/* Contenedor principal */
+.container { 
+    position:relative; 
+    z-index:10; 
+    padding:10px 20px; 
+    text-align:center; 
+    height:calc(100vh - 140px); 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:space-between;
+}
 
 /* Título */
-.title { font-size:3rem; font-weight:900; color:#ffd700; text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); letter-spacing:2px; animation: glow 2s ease-in-out infinite alternate; position:relative; margin-top:10px; }
-.title::before { content:'🍀'; position:absolute; left:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite; }
-.title::after { content:'🍀'; position:absolute; right:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite reverse; }
-@keyframes glow { from { text-shadow:0 0 8px #ffd700,0 0 16px #ffd700,2px 2px 4px rgba(0,0,0,0.5); } to { text-shadow:0 0 12px #ffd700,0 0 20px #ffed4e,2px 2px 4px rgba(0,0,0,0.5); } }
-@keyframes rotate { from {transform:translateY(-50%) rotate(0deg);} to {transform:translateY(-50%) rotate(360deg);} }
+.title { 
+    font-size:3rem; 
+    font-weight:900; 
+    color:#ffd700; 
+    text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); 
+    letter-spacing:2px; 
+    animation: glow 2s ease-in-out infinite alternate; 
+    position:relative; 
+    margin-top:10px;
+}
+.title::before { 
+    content:'🍀'; 
+    position:absolute; 
+    left:-50px; 
+    top:50%; 
+    transform:translateY(-50%); 
+    font-size:2rem; 
+    animation:rotate 3s linear infinite;
+}
+.title::after { 
+    content:'🍀'; 
+    position:absolute; 
+    right:-50px; 
+    top:50%; 
+    transform:translateY(-50%); 
+    font-size:2rem; 
+    animation:rotate 3s linear infinite reverse;
+}
+@keyframes glow { 
+    from { text-shadow:0 0 8px #ffd700,0 0 16px #ffd700,2px 2px 4px rgba(0,0,0,0.5); } 
+    to { text-shadow:0 0 12px #ffd700,0 0 20px #ffed4e,2px 2px 4px rgba(0,0,0,0.5); } 
+}
+@keyframes rotate { 
+    from {transform:translateY(-50%) rotate(0deg);} 
+    to {transform:translateY(-50%) rotate(360deg);} 
+}
 
 /* Descripción */
-.middle-section { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-.description { font-size:1.5rem; background:linear-gradient(45deg,#fff,#ffd700,#ffed4e,#fff); background-size:300% 300%; background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textGradient 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate; font-weight:800; line-height:1.3; text-align:center; text-shadow:0 0 15px rgba(255,215,0,0.5); margin-bottom:10px; }
+.middle-section { 
+    flex:1; 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center; 
+    align-items:center;
+    width:100%;
+}
+.description { 
+    font-size:1.5rem; 
+    background:linear-gradient(45deg,#fff,#ffd700,#ffed4e,#fff); 
+    background-size:300% 300%; 
+    background-clip:text; 
+    -webkit-background-clip:text; 
+    -webkit-text-fill-color:transparent; 
+    animation:textGradient 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate; 
+    font-weight:800; 
+    line-height:1.3; 
+    text-align:center; 
+    text-shadow:0 0 15px rgba(255,215,0,0.5); 
+    margin-bottom:10px;
+}
 @keyframes textGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 @keyframes textGlow { from {text-shadow:0 0 10px rgba(255,215,0,0.5);} to {text-shadow:0 0 20px rgba(255,215,0,0.8);} }
 
 /* Botón principal */
-.cta-button { background: linear-gradient(45deg, #ff4e50, #f9d423); background-size:200% 200%; border:none; padding:18px 35px; font-size:1.4rem; font-weight:900; color:#000; border-radius:50px; cursor:pointer; text-transform:uppercase; letter-spacing:1px; box-shadow:0 8px 20px rgba(255,94,94,0.4), inset 0 2px 4px rgba(255,255,255,0.3); transition: all 0.3s ease; animation:pulse 2s infinite, gradientMove 3s ease infinite; margin:10px 0; }
-.cta-button:hover { transform:scale(1.05); box-shadow:0 12px 30px rgba(255,94,94,0.6), inset 0 2px 4px rgba(255,255,255,0.4); }
+.cta-button { 
+    background: linear-gradient(45deg, #ff4e50, #f9d423); 
+    background-size:200% 200%; 
+    border:none; 
+    padding:18px 35px; 
+    font-size:1.4rem; 
+    font-weight:900; 
+    color:#000; 
+    border-radius:50px; 
+    cursor:pointer; 
+    text-transform:uppercase; 
+    letter-spacing:1px; 
+    box-shadow:0 8px 20px rgba(255,94,94,0.4), inset 0 2px 4px rgba(255,255,255,0.3); 
+    transition: all 0.3s ease; 
+    animation:pulse 2s infinite, gradientMove 3s ease infinite; 
+    margin:10px 0;
+}
+.cta-button:hover { 
+    transform:scale(1.05); 
+    box-shadow:0 12px 30px rgba(255,94,94,0.6), inset 0 2px 4px rgba(255,255,255,0.4);
+}
 .cta-button:active { transform:scale(0.95); }
 @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
 @keyframes gradientMove { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 
 /* Verificación */
-.verification { display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; font-weight:600; margin:10px 0; text-shadow:1px 1px 2px rgba(0,0,0,0.7); }
-.verification::before,.verification::after { content:'✅'; margin:0 5px; animation:bounce 2s infinite; }
+.verification { 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    color:#fff; 
+    font-size:1rem; 
+    font-weight:600; 
+    margin:10px 0; 
+    text-shadow:1px 1px 2px rgba(0,0,0,0.7);
+}
+.verification::before,.verification::after { 
+    content:'✅'; 
+    margin:0 5px; 
+    animation:bounce 2s infinite;
+}
+@keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
 
 /* Notificaciones */
-.notification-container { width:100%; max-width:400px; height:180px; overflow:hidden; position:relative; margin:10px auto; }
-.winner-notification { position:absolute; top:0; left:50%; transform:translateX(-50%); width:95%; max-width:400px; background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.95)); padding:15px 20px; border-radius:15px; border:2px solid #ffd700; box-shadow:0 10px 30px rgba(0,0,0,0.8),0 0 20px rgba(255,215,0,0.3); animation: slideInOut 6s ease-in-out; color:#fff; font-size:0.9rem; }
+.notification-container { 
+    width:100%; 
+    max-width:400px; 
+    height:180px; 
+    overflow:hidden; 
+    position:relative; 
+    margin:10px auto;
+}
+.winner-notification { 
+    position:absolute; 
+    top:0; 
+    left:50%; 
+    transform:translateX(-50%); 
+    width:95%; 
+    max-width:400px; 
+    background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.95)); 
+    padding:15px 20px; 
+    border-radius:15px; 
+    border:2px solid #ffd700; 
+    box-shadow:0 10px 30px rgba(0,0,0,0.8),0 0 20px rgba(255,215,0,0.3); 
+    animation: slideInOut 6s ease-in-out; 
+    color:#fff; 
+    font-size:0.9rem;
+}
+@keyframes slideInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+}
 .winner-notification h3 { color:#ffd700; font-size:1rem; margin-bottom:2px; }
 .winner-notification .notification-amount { color:#00ffcc; font-weight:700; }
 .winner-notification .notification-location { color:#fffa65; }
@@ -69,11 +213,116 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     box-sizing: border-box;
     text-align:center;
 }
-.bonus-section::before { content:'🎉'; position:absolute; font-size:2rem; animation:bounce 2s infinite; top:5px; left:5px; }
-.bonus-section::after { content:'🎉'; position:absolute; font-size:2rem; animation:bounce 2s infinite 0.5s; top:5px; right:5px; }
-.bonus-header { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:5px; text-shadow:2px 2px 4px rgba(0,0,0,0.5); }
-.bonus-percentage { font-size:2.5rem; font-weight:900; color:#fff; text-shadow:3px 3px 6px rgba(0,0,0,0.5); margin:5px 0; animation:pulse 2s infinite; }
-.bonus-description { color:#fff; font-size:1rem; font-weight:600; text-shadow:1px 1px 2px rgba(0,0,0,0.5); }
+
+/* Texto promocional llamativo */
+.promo-text {
+    width: 100vw;
+    margin: 0;
+    padding: 25px 15px;
+    background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
+    background-size: 200% 200%;
+    animation: darkGradientMove 4s ease infinite;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-align: center;
+    border-top: 3px solid #ffd700;
+    box-shadow: inset 0 5px 15px rgba(255, 215, 0, 0.2);
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
+}
+
+.promo-text .highlight {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8);
+    animation: intensePulse 1.5s ease-in-out infinite;
+    letter-spacing: 1px;
+}
+
+.promo-text .promo-main {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    display: inline-block;
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.promo-text .promo-sub {
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #ff6b35, #f9ca24, #ff6b35);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fireGradient 2s ease infinite;
+    text-shadow: none;
+}
+
+@keyframes darkGradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes intensePulse {
+    0%, 100% { 
+        transform: scale(1);
+        text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% { 
+        transform: scale(1.08);
+        text-shadow: 0 0 20px #ffd700, 0 0 30px #ffed4e, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+}
+
+@keyframes fireGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+.bonus-section::before { 
+    content:'🎉'; 
+    position:absolute; 
+    font-size:2rem; 
+    animation:bounce 2s infinite; 
+    top:5px; 
+    left:5px;
+}
+.bonus-section::after { 
+    content:'🎉'; 
+    position:absolute; 
+    font-size:2rem; 
+    animation:bounce 2s infinite 0.5s; 
+    top:5px; 
+    right:5px;
+}
+.bonus-header { 
+    color:#fff; 
+    font-size:1.1rem; 
+    font-weight:700; 
+    margin-bottom:5px; 
+    text-shadow:2px 2px 4px rgba(0,0,0,0.5);
+}
+.bonus-percentage { 
+    font-size:2.5rem; 
+    font-weight:900; 
+    color:#fff; 
+    text-shadow:3px 3px 6px rgba(0,0,0,0.5); 
+    margin:5px 0; 
+    animation:pulse 2s infinite;
+}
+.bonus-description { 
+    color:#fff; 
+    font-size:1rem; 
+    font-weight:600; 
+    text-shadow:1px 1px 2px rgba(0,0,0,0.5);
+}
 
 /* Responsivo */
 @media (max-width:480px){
@@ -85,33 +334,93 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     .bonus-percentage{font-size:2rem;}
     .bonus-header{font-size:1rem;}
     .bonus-description{font-size:0.9rem;}
+    .promo-text .highlight{font-size:1.1rem;}
+    .promo-text .promo-main{font-size:1rem;}
+    .promo-text .promo-sub{font-size:0.9rem;}
 }
 </style>
 </head>
 <body>
 <div class="background">
     <div class="particles" id="particles"></div>
+</div>
 
-    <div class="container">
-        <h1 class="title">GOLD CLOVER</h1>
-        <div class="middle-section">
-            <p class="description">Escríbenos por WhatsApp<br>apretando el botón de abajo<br>⬇️⬇️⬇️⬇️⬇️</p>
-            <button class="cta-button" onclick="redirectToWhatsApp()">OBTENER BONO AHORA</button>
-            <div class="verification">Plataforma Verificada</div>
-            <div class="notification-container">
-                <div id="winner-notifications"></div>
-            </div>
+<div class="container">
+    <h1 class="title">GOLD CLOVER</h1>
+    <div class="middle-section">
+        <p class="description">Escríbenos por WhatsApp<br>apretando el botón de abajo<br>⬇️⬇️⬇️⬇️⬇️</p>
+        <button class="cta-button" onclick="handleButtonClick()">OBTENER BONO AHORA</button>
+        <div class="verification">Plataforma Verificada</div>
+        <div class="notification-container">
+            <div id="winner-notifications"></div>
         </div>
     </div>
+</div>
 
-    <div class="bonus-section">
-        <div class="bonus-header">🏆 SUPER BONO EXCLUSIVO 🏆</div>
-        <div class="bonus-percentage">50%</div>
-        <div class="bonus-description">BONIFICADO EN TU PRIMER DEPÓSITO</div>
+<div class="bonus-section">
+    <div class="bonus-header">🏆 SUPER BONO EXCLUSIVO 🏆</div>
+    <div class="bonus-percentage">50%</div>
+    <div class="bonus-description">BONIFICADO EN TU PRIMER DEPÓSITO</div>
+</div>
+
+<div class="promo-text">
+    <div class="promo-content">
+        ⚡ <span class="highlight">¡OFERTA LIMITADA!</span> ⚡<br>
+        <span class="promo-main">Duplica tu dinero al instante con nuestro bono exclusivo del 50%</span><br>
+        <span class="promo-sub">🔥 Solo por tiempo limitado - ¡No te quedes sin el tuyo! 🔥</span>
     </div>
 </div>
 
 <script>
+// Facebook Pixel y Conversions API
+function initializeFacebookTracking() {
+    // Facebook Pixel (reemplaza YOUR_PIXEL_ID con tu ID real)
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Reemplaza 'YOUR_PIXEL_ID' con tu Pixel ID real
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+}
+
+// Función para trackear eventos
+function trackConversion(eventType) {
+    if (typeof fbq !== 'undefined') {
+        switch(eventType) {
+            case 'lead':
+                fbq('track', 'Lead', {
+                    content_name: 'Gold Clover WhatsApp Lead',
+                    content_category: 'Casino Bonus',
+                    value: 50,
+                    currency: 'USD'
+                });
+                break;
+            case 'initiate_checkout':
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Gold Clover Bonus Initiation',
+                    value: 50,
+                    currency: 'USD'
+                });
+                break;
+        }
+    }
+    
+    // También enviar a Google Analytics si está disponible
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL', // Reemplaza con tus datos reales
+            'value': 50.0,
+            'currency': 'USD'
+        });
+    }
+}
+
 const winners = [
     { name:"María González", amount:"$45,230", location:"Buenos Aires", avatar:"👩" },
     { name:"Carlos Mendoza", amount:"$67,890", location:"Córdoba", avatar:"👨" },
@@ -124,7 +433,9 @@ const winners = [
     { name:"Gabriela Ruiz", amount:"$91,760", location:"Santa Fe", avatar:"👩" },
     { name:"Miguel Torres", amount:"$38,940", location:"Neuquén", avatar:"👨" }
 ];
+
 let currentWinnerIndex = 0;
+
 function showWinnerNotification(){
     const winner=winners[currentWinnerIndex];
     const notification=document.createElement('div');
@@ -145,21 +456,91 @@ function showWinnerNotification(){
     `;
     const container=document.getElementById('winner-notifications');
     container.appendChild(notification);
-    setTimeout(()=>{if(notification.parentNode){notification.parentNode.removeChild(notification);}},6000);
+    setTimeout(()=>{
+        if(notification.parentNode){
+            notification.parentNode.removeChild(notification);
+        }
+    },6000);
     currentWinnerIndex=(currentWinnerIndex+1)%winners.length;
 }
 
-function createParticles(){
-    const particlesContainer=document.getElementById('particles');
-    const particleCount=25;
-    for(let i=0;i<particleCount;i++){
-        const particle=document.createElement('div');
-        particle.className='particle';
-        particle.style.left=Math.random()*100+'%';
-        particle.style.animationDelay=Math.random()*6+'s';
-        particle.style.animationDuration=(Math.random()*4+4)+'s';
-        particlesContainer.appendChild(particle);
+// Partículas optimizadas con requestAnimationFrame
+class ParticleSystem {
+    constructor() {
+        this.particles = [];
+        this.container = document.getElementById('particles');
+        this.isRunning = false;
+        this.lastTime = 0;
     }
+    
+    createParticle() {
+        return {
+            x: Math.random() * window.innerWidth,
+            y: window.innerHeight + 10,
+            speed: Math.random() * 2 + 1,
+            opacity: Math.random() * 0.6 + 0.2,
+            element: null
+        };
+    }
+    
+    init() {
+        // Crear elementos DOM para las partículas
+        for(let i = 0; i < 15; i++) {
+            const particle = this.createParticle();
+            const element = document.createElement('div');
+            element.className = 'particle';
+            element.style.left = particle.x + 'px';
+            element.style.top = particle.y + 'px';
+            element.style.opacity = particle.opacity;
+            this.container.appendChild(element);
+            particle.element = element;
+            this.particles.push(particle);
+        }
+        this.start();
+    }
+    
+    update(currentTime) {
+        if (currentTime - this.lastTime > 50) { // Limitar a ~20fps para mejor performance
+            this.particles.forEach(particle => {
+                particle.y -= particle.speed;
+                
+                if (particle.y < -10) {
+                    particle.y = window.innerHeight + 10;
+                    particle.x = Math.random() * window.innerWidth;
+                    particle.opacity = Math.random() * 0.6 + 0.2;
+                }
+                
+                particle.element.style.transform = `translate3d(${particle.x}px, ${particle.y}px, 0)`;
+                particle.element.style.opacity = particle.opacity;
+            });
+            this.lastTime = currentTime;
+        }
+        
+        if (this.isRunning) {
+            requestAnimationFrame((time) => this.update(time));
+        }
+    }
+    
+    start() {
+        this.isRunning = true;
+        requestAnimationFrame((time) => this.update(time));
+    }
+    
+    stop() {
+        this.isRunning = false;
+    }
+}
+
+// Manejar click del botón principal
+function handleButtonClick() {
+    // Trackear conversión antes de redireccionar
+    trackConversion('lead');
+    trackConversion('initiate_checkout');
+    
+    // Pequeño delay para asegurar que el tracking se envíe
+    setTimeout(() => {
+        redirectToWhatsApp();
+    }, 100);
 }
 
 function redirectToWhatsApp(){
@@ -169,11 +550,38 @@ function redirectToWhatsApp(){
     window.open(whatsappURL,'_blank');
 }
 
+// Inicialización
+let particleSystem;
+
 window.addEventListener('load',()=>{
-    createParticles();
-    setTimeout(showWinnerNotification,3000);
-    setInterval(showWinnerNotification,8000);
+    // Inicializar Facebook tracking
+    initializeFacebookTracking();
+    
+    // Crear sistema de partículas optimizado
+    particleSystem = new ParticleSystem();
+    particleSystem.init();
+    
+    // Inicializar notificaciones de ganadores
+    setTimeout(showWinnerNotification, 3000);
+    setInterval(showWinnerNotification, 8000);
+});
+
+// Pausar partículas cuando la página no está visible (optimización adicional)
+document.addEventListener('visibilitychange', () => {
+    if (particleSystem) {
+        if (document.hidden) {
+            particleSystem.stop();
+        } else {
+            particleSystem.start();
+        }
+    }
 });
 </script>
+
+<!-- Noscript para Facebook Pixel -->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+/></noscript>
+
 </body>
 </html>

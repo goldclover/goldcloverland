@@ -5,105 +5,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gold Clover - ¡Obtén tu Bono Ahora!</title>
 <style>
-/* --- Reset básico --- */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Arial',sans-serif; overflow-x:hidden; }
-
-/* --- Fondo animado --- */
-.background {
-    background: linear-gradient(45deg, #0d0415, #1a0b2e, #2d1b4e, #3f2860);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    min-height: 100vh;
-    position: relative;
-}
-@keyframes gradientShift {
-    0%,100%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-}
-
-/* --- Contenedor principal --- */
-.container {
-    position: relative;
-    z-index: 10;
-    padding: 20px 15px;
-    text-align: center;
-}
-
-/* --- Título --- */
-.title {
-    font-size:3rem;
-    font-weight:900;
-    color:#ffd700;
-    text-shadow:0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5);
-    margin:20px 0;
-    line-height:1.2;
-}
-
-/* --- Sección media --- */
-.middle-section { display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:20px; }
-.description { 
-    font-size:1.5rem; text-align:center; color:#fff; margin-bottom:15px;
-}
-
-/* --- Botón principal --- */
-.cta-button {
-    background: linear-gradient(45deg, #ff4e50, #f9d423);
-    border:none;
-    padding:16px 30px;
-    font-size:1.3rem;
-    font-weight:900;
-    color:#000;
-    border-radius:50px;
-    cursor:pointer;
-    margin-bottom:15px;
-    transition: all 0.3s ease;
-}
-.cta-button:hover { transform:scale(1.05); }
-
-/* --- Verificación --- */
-.verification {
-    color:#fff;
-    font-weight:600;
-    margin-bottom:20px;
-}
-
-/* --- Bonus --- */
-.bonus-section {
-    width:100%;
-    padding:20px 10px;
-    background: linear-gradient(135deg,#ff4757,#ff6b7a);
-    text-align:center;
-    color:#fff;
-}
-.bonus-header { font-size:1.2rem; font-weight:700; margin-bottom:5px; }
-.bonus-percentage { font-size:2rem; font-weight:900; margin:5px 0; }
-.bonus-description { font-size:1rem; font-weight:600; }
-
-/* --- Promo --- */
+/* --- Pie de página fijo --- */
+.bonus-section,
 .promo-text {
-    width:100%;
-    padding:20px 10px;
-    background: linear-gradient(135deg, #000, #1a1a1a, #333);
-    text-align:center;
-    color:#fff;
-    margin-top:10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 20;
+    box-sizing: border-box;
 }
-.promo-text .highlight { font-weight:900; color:#ffd700; }
-.promo-text .promo-main { font-weight:700; }
-.promo-text .promo-sub { font-weight:600; background: linear-gradient(45deg, #ff6b35, #f9ca24); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 
-/* --- Responsivo --- */
+/* Ajuste de bonus y promo para que no se solapen */
+.bonus-section { 
+    padding: 15px 10px; 
+}
+.promo-text { 
+    padding: 15px 10px; 
+    margin-bottom: 80px; /* dejar espacio para bonus-section */
+}
+
+/* --- Notificaciones de ganadores --- */
+.notification-container {
+    position: fixed;
+    bottom: 120px; /* sobre los contenedores fijos */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 400px;
+    z-index: 30;
+    pointer-events: none; /* no bloquea clicks */
+}
+
+/* Notificación individual con recuadro y colores */
+.winner-notification {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.95));
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 0.9rem;
+    margin: 5px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInOut 6s ease-in-out forwards;
+}
+
+/* Avatar */
+.winner-notification .notification-avatar {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+/* Detalles */
+.winner-notification .notification-details h3 {
+    color: #ffd700;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+.winner-notification .notification-amount {
+    color: #00ffcc;
+    font-weight: 700;
+}
+.winner-notification .notification-location {
+    color: #fffa65;
+    font-size: 0.85rem;
+}
+
+/* Animación suave */
+@keyframes slideInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    10%, 80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* Responsivo */
 @media (max-width:480px){
-    .title { font-size:2rem; }
-    .description { font-size:1.2rem; }
-    .cta-button { padding:12px 20px; font-size:1rem; }
-    .bonus-header { font-size:1rem; }
-    .bonus-percentage { font-size:1.5rem; }
-    .bonus-description { font-size:0.9rem; }
-    .promo-text .highlight { font-size:1.1rem; }
-    .promo-text .promo-main { font-size:1rem; }
-    .promo-text .promo-sub { font-size:0.9rem; }
+    .winner-notification { flex-direction: column; align-items: flex-start; font-size: 0.8rem; padding: 8px; }
+    .winner-notification .notification-avatar { font-size: 1.5rem; margin-bottom: 5px; }
+    .winner-notification .notification-details h3 { font-size: 0.9rem; }
+    .winner-notification .notification-amount { font-size: 0.85rem; }
+    .winner-notification .notification-location { font-size: 0.75rem; }
 }
 
 </style>

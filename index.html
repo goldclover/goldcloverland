@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gold Clover - ¡Obtén tu Bono Ahora!</title>
 <style>
+/* Reset básico */
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
 
@@ -15,7 +16,7 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     animation: gradientShift 8s ease infinite;
     height:100vh;
     position:relative;
-    overflow:hidden; /* evita scroll por partículas */
+    overflow:hidden;
 }
 @keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 
@@ -40,11 +41,29 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     will-change: transform, opacity;
 }
 
-/* Contenedor principal sin scroll */
-.container { position:relative; z-index:10; padding:10px 20px; text-align:center; height:calc(100vh - 280px); display:flex; flex-direction:column; justify-content:space-between; }
+/* Contenedor principal */
+.container {
+    position:relative; 
+    z-index:10; 
+    padding:10px 20px; 
+    text-align:center; 
+    height:calc(100vh - 280px); 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:space-between; 
+}
 
 /* Título */
-.title { font-size:3rem; font-weight:900; color:#ffd700; text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); letter-spacing:2px; animation: glow 2s ease-in-out infinite alternate; position:relative; margin-top:10px; }
+.title { 
+    font-size:3rem; 
+    font-weight:900; 
+    color:#ffd700; 
+    text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); 
+    letter-spacing:2px; 
+    animation: glow 2s ease-in-out infinite alternate; 
+    position:relative; 
+    margin-top:10px; 
+}
 .title::before { content:'🍀'; position:absolute; left:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite; }
 .title::after { content:'🍀'; position:absolute; right:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite reverse; }
 @keyframes glow { from { text-shadow:0 0 8px #ffd700,0 0 16px #ffd700,2px 2px 4px rgba(0,0,0,0.5); } to { text-shadow:0 0 12px #ffd700,0 0 20px #ffed4e,2px 2px 4px rgba(0,0,0,0.5); } }
@@ -52,12 +71,41 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
 
 /* Descripción */
 .middle-section { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-.description { font-size:1.5rem; background:linear-gradient(45deg,#fff,#ffd700,#ffed4e,#fff); background-size:300% 300%; background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textGradient 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate; font-weight:800; line-height:1.3; text-align:center; text-shadow:0 0 15px rgba(255,215,0,0.5); margin-bottom:10px; }
+.description { 
+    font-size:1.5rem; 
+    background:linear-gradient(45deg,#fff,#ffd700,#ffed4e,#fff); 
+    background-size:300% 300%; 
+    background-clip:text; 
+    -webkit-background-clip:text; 
+    -webkit-text-fill-color:transparent; 
+    animation:textGradient 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate; 
+    font-weight:800; 
+    line-height:1.3; 
+    text-align:center; 
+    text-shadow:0 0 15px rgba(255,215,0,0.5); 
+    margin-bottom:10px; 
+}
 @keyframes textGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 @keyframes textGlow { from {text-shadow:0 0 10px rgba(255,215,0,0.5);} to {text-shadow:0 0 20px rgba(255,215,0,0.8);} }
 
 /* Botón principal */
-.cta-button { background: linear-gradient(45deg, #ff4e50, #f9d423); background-size:200% 200%; border:none; padding:18px 35px; font-size:1.4rem; font-weight:900; color:#000; border-radius:50px; cursor:pointer; text-transform:uppercase; letter-spacing:1px; box-shadow:0 8px 20px rgba(255,94,94,0.4), inset 0 2px 4px rgba(255,255,255,0.3); transition: all 0.3s ease; animation:pulse 2s infinite, gradientMove 3s ease infinite; margin:10px 0; }
+.cta-button { 
+    background: linear-gradient(45deg, #ff4e50, #f9d423); 
+    background-size:200% 200%; 
+    border:none; 
+    padding:18px 35px; 
+    font-size:1.4rem; 
+    font-weight:900; 
+    color:#000; 
+    border-radius:50px; 
+    cursor:pointer; 
+    text-transform:uppercase; 
+    letter-spacing:1px; 
+    box-shadow:0 8px 20px rgba(255,94,94,0.4), inset 0 2px 4px rgba(255,255,255,0.3); 
+    transition: all 0.3s ease; 
+    animation:pulse 2s infinite, gradientMove 3s ease infinite; 
+    margin:10px 0; 
+}
 .cta-button:hover { transform:scale(1.05); box-shadow:0 12px 30px rgba(255,94,94,0.6), inset 0 2px 4px rgba(255,255,255,0.4); }
 .cta-button:active { transform:scale(0.95); }
 @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
@@ -101,7 +149,7 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
 .bonus-percentage { font-size:2.5rem; font-weight:900; color:#fff; text-shadow:3px 3px 6px rgba(0,0,0,0.5); margin:5px 0; animation:pulse 2s infinite; }
 .bonus-description { color:#fff; font-size:1rem; font-weight:600; text-shadow:1px 1px 2px rgba(0,0,0,0.5); }
 
-/* Texto promocional llamativo */
+/* Texto promocional */
 .promo-text {
     width: 100vw;
     margin: 0;
@@ -116,69 +164,22 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     border-top: 3px solid #ffd700;
     box-shadow: inset 0 5px 15px rgba(255, 215, 0, 0.2);
 }
+.promo-content { position: relative; z-index: 2; }
+.promo-text .highlight { font-size: 1.3rem; font-weight: 900; color: #ffd700; text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8); animation: intensePulse 1.5s ease-in-out infinite; letter-spacing: 1px; }
+.promo-text .promo-main { font-size: 1.1rem; font-weight: 700; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); display: inline-block; margin: 8px 0; line-height: 1.4; }
+.promo-text .promo-sub { font-size: 1rem; font-weight: 600; background: linear-gradient(45deg, #ff6b35, #f9ca24, #ff6b35); background-size: 200% 200%; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fireGradient 2s ease infinite; text-shadow: none; }
 
-.promo-content {
-    position: relative;
-    z-index: 2;
-}
-
-.promo-text .highlight {
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: #ffd700;
-    text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8);
-    animation: intensePulse 1.5s ease-in-out infinite;
-    letter-spacing: 1px;
-}
-
-.promo-text .promo-main {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-    display: inline-block;
-    margin: 8px 0;
-    line-height: 1.4;
-}
-
-.promo-text .promo-sub {
-    font-size: 1rem;
-    font-weight: 600;
-    background: linear-gradient(45deg, #ff6b35, #f9ca24, #ff6b35);
-    background-size: 200% 200%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: fireGradient 2s ease infinite;
-    text-shadow: none;
-}
-
-@keyframes darkGradientMove {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-@keyframes intensePulse {
-    0%, 100% { 
-        transform: scale(1);
-        text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    50% { 
-        transform: scale(1.08);
-        text-shadow: 0 0 20px #ffd700, 0 0 30px #ffed4e, 2px 2px 4px rgba(0,0,0,0.8);
-    }
-}
-
-@keyframes fireGradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
+/* Animaciones */
+@keyframes darkGradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes intensePulse { 0%, 100% { transform: scale(1); text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8); } 50% { transform: scale(1.08); text-shadow: 0 0 20px #ffd700, 0 0 30px #ffed4e, 2px 2px 4px rgba(0,0,0,0.8); } }
+@keyframes fireGradient { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
 /* Responsivo */
 @media (max-width:480px){
-    .title{font-size:2rem;margin-top:5px;}
+    .container { height:auto; min-height:calc(100vh - 200px); justify-content:flex-start; padding:10px 15px; }
+    .title{font-size:2rem;margin-top:20px; line-height:1.2;}
     .title::before,.title::after{display:none;}
-    .description{font-size:1.2rem;margin:5px 0;}
+    .description{font-size:1.2rem;margin:10px 0;}
     .cta-button{padding:14px 25px;font-size:1rem;}
     .winner-notification{font-size:0.8rem;padding:10px;}
     .bonus-percentage{font-size:2rem;}
@@ -187,14 +188,12 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     .promo-text .highlight{font-size:1.1rem;}
     .promo-text .promo-main{font-size:1rem;}
     .promo-text .promo-sub{font-size:0.9rem;}
-    .container{height:calc(100vh - 350px);}
 }
 </style>
 </head>
 <body>
 <div class="background">
     <div class="particles" id="particles"></div>
-
     <div class="container">
         <h1 class="title">GOLD CLOVER</h1>
         <div class="middle-section">
@@ -216,16 +215,15 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     <div class="promo-text">
         <div class="promo-content">
             ⚡ <span class="highlight">¡OFERTA LIMITADA!</span> ⚡<br>
-            <span class="promo-main">COMENZA A JUGAR AHORA</span><br>
+            <span class="promo-main">COMIENZA A JUGAR AHORA</span><br>
             <span class="promo-sub">🔥 Solo por tiempo limitado - ¡No te quedes sin el tuyo! 🔥</span>
         </div>
     </div>
 </div>
 
 <script>
-// Facebook Pixel y Conversions API
-function initializeFacebookTracking() {
-    // Facebook Pixel (reemplaza YOUR_PIXEL_ID con tu ID real)
+// Facebook Pixel tracking
+function initializeFacebookTracking(){
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -234,205 +232,42 @@ function initializeFacebookTracking() {
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
-    // Reemplaza 'YOUR_PIXEL_ID' con tu Pixel ID real
-    fbq('init', '24403633855955337');
-    fbq('track', 'PageView');
+    fbq('init','24403633855955337');
+    fbq('track','PageView');
 }
 
-// Función para trackear eventos
-function trackConversion(eventType) {
-    if (typeof fbq !== 'undefined') {
-        switch(eventType) {
-            case 'lead':
-                fbq('track', 'Lead', {
-                    content_name: 'Gold Clover WhatsApp Lead',
-                    content_category: 'Bonus',
-                    value: 1,
-                    currency: 'USD'
-                });
-                break;
-            case 'initiate_checkout':
-                fbq('track', 'InitiateCheckout', {
-                    content_name: 'Gold Clover Bonus Initiation',
-                    value: 1,
-                    currency: 'USD'
-                });
-                break;
-        }
-    }
-    
-    // También enviar a Google Analytics si está disponible
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-            'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL', // Reemplaza con tus datos reales
-            'value': 50.0,
-            'currency': 'USD'
-        });
+function trackConversion(eventType){
+    if(typeof fbq!=='undefined'){
+        if(eventType==='lead') fbq('track','Lead',{content_name:'Gold Clover WhatsApp Lead', content_category:'Bonus', value:1, currency:'USD'});
+        if(eventType==='initiate_checkout') fbq('track','InitiateCheckout',{content_name:'Gold Clover Bonus Initiation', value:1, currency:'USD'});
     }
 }
 
-const winners = [
-    { name:"María González", amount:"$45,230", location:"Buenos Aires", avatar:"👩" },
-    { name:"Carlos Mendoza", amount:"$67,890", location:"Córdoba", avatar:"👨" },
-    { name:"Ana Rodríguez", amount:"$23,450", location:"Rosario", avatar:"👩" },
-    { name:"Diego López", amount:"$89,120", location:"Mendoza", avatar:"👨" },
-    { name:"Laura Martín", amount:"$34,670", location:"La Plata", avatar:"👩" },
-    { name:"Roberto Silva", amount:"$56,340", location:"Tucumán", avatar:"👨" },
-    { name:"Patricia Morales", amount:"$78,210", location:"Salta", avatar:"👩" },
-    { name:"Fernando Castro", amount:"$42,580", location:"Mar del Plata", avatar:"👨" },
-    { name:"Gabriela Ruiz", amount:"$91,760", location:"Santa Fe", avatar:"👩" },
-    { name:"Miguel Torres", amount:"$38,940", location:"Neuquén", avatar:"👨" }
-];
-
-let currentWinnerIndex = 0;
-
-function showWinnerNotification(){
-    const winner=winners[currentWinnerIndex];
-    const notification=document.createElement('div');
-    notification.className='winner-notification';
-    notification.innerHTML=`
-        <div class="notification-header">
-            <div class="notification-icon">🎉</div>
-            <div class="notification-title">¡Nuevo Ganador!</div>
-        </div>
-        <div class="notification-info">
-            <div class="notification-avatar">${winner.avatar}</div>
-            <div class="notification-details">
-                <h3>${winner.name}</h3>
-                <div class="notification-amount">🏆 Ganó ${winner.amount}</div>
-                <div class="notification-location">📍 ${winner.location}</div>
-            </div>
-        </div>
-    `;
-    const container=document.getElementById('winner-notifications');
-    container.appendChild(notification);
-    setTimeout(()=>{
-        if(notification.parentNode){
-            notification.parentNode.removeChild(notification);
-        }
-    },6000);
-    currentWinnerIndex=(currentWinnerIndex+1)%winners.length;
+// Partículas
+class ParticleSystem{
+    constructor(){ this.particles=[]; this.container=document.getElementById('particles'); this.isRunning=false; this.lastTime=0; }
+    createParticle(){ return {x:Math.random()*window.innerWidth, y:window.innerHeight+10, speed:Math.random()*2+1, opacity:Math.random()*0.6+0.2, element:null}; }
+    init(){ for(let i=0;i<15;i++){ let p=this.createParticle(); let e=document.createElement('div'); e.className='particle'; e.style.left=p.x+'px'; e.style.top=p.y+'px'; e.style.opacity=p.opacity; this.container.appendChild(e); p.element=e; this.particles.push(p);} this.start();}
+    update(currentTime){ if(currentTime-this.lastTime>50){ this.particles.forEach(p=>{ p.y-=p.speed; if(p.y<-10){ p.y=window.innerHeight+10; p.x=Math.random()*window.innerWidth; p.opacity=Math.random()*0.6+0.2; } p.element.style.transform=`translate3d(${p.x}px,${p.y}px,0)`; p.element.style.opacity=p.opacity; }); this.lastTime=currentTime;} if(this.isRunning) requestAnimationFrame((t)=>this.update(t));}
+    start(){ this.isRunning=true; requestAnimationFrame((t)=>this.update(t)); }
+    stop(){ this.isRunning=false; }
 }
 
-// Partículas optimizadas con requestAnimationFrame
-class ParticleSystem {
-    constructor() {
-        this.particles = [];
-        this.container = document.getElementById('particles');
-        this.isRunning = false;
-        this.lastTime = 0;
-    }
-    
-    createParticle() {
-        return {
-            x: Math.random() * window.innerWidth,
-            y: window.innerHeight + 10,
-            speed: Math.random() * 2 + 1,
-            opacity: Math.random() * 0.6 + 0.2,
-            element: null
-        };
-    }
-    
-    init() {
-        // Crear elementos DOM para las partículas
-        for(let i = 0; i < 15; i++) {
-            const particle = this.createParticle();
-            const element = document.createElement('div');
-            element.className = 'particle';
-            element.style.left = particle.x + 'px';
-            element.style.top = particle.y + 'px';
-            element.style.opacity = particle.opacity;
-            this.container.appendChild(element);
-            particle.element = element;
-            this.particles.push(particle);
-        }
-        this.start();
-    }
-    
-    update(currentTime) {
-        if (currentTime - this.lastTime > 50) { // Limitar a ~20fps para mejor performance
-            this.particles.forEach(particle => {
-                particle.y -= particle.speed;
-                
-                if (particle.y < -10) {
-                    particle.y = window.innerHeight + 10;
-                    particle.x = Math.random() * window.innerWidth;
-                    particle.opacity = Math.random() * 0.6 + 0.2;
-                }
-                
-                particle.element.style.transform = `translate3d(${particle.x}px, ${particle.y}px, 0)`;
-                particle.element.style.opacity = particle.opacity;
-            });
-            this.lastTime = currentTime;
-        }
-        
-        if (this.isRunning) {
-            requestAnimationFrame((time) => this.update(time));
-        }
-    }
-    
-    start() {
-        this.isRunning = true;
-        requestAnimationFrame((time) => this.update(time));
-    }
-    
-    stop() {
-        this.isRunning = false;
-    }
-}
+// Botón
+function handleButtonClick(){ trackConversion('lead'); trackConversion('initiate_checkout'); setTimeout(()=>{redirectToWhatsApp();},100);}
+function redirectToWhatsApp(){ const phoneNumber="5491125459137"; const message="¡Hola! Quiero crear mi usuario y obtener mi bono del 50% de Gold Clover 🍀💰"; window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,'_blank');}
 
-// Manejar click del botón principal
-function handleButtonClick() {
-    // Trackear conversión antes de redireccionar
-    trackConversion('lead');
-    trackConversion('initiate_checkout');
-    
-    // Pequeño delay para asegurar que el tracking se envíe
-    setTimeout(() => {
-        redirectToWhatsApp();
-    }, 100);
-}
-
-function redirectToWhatsApp(){
-    const phoneNumber="5491125459137";
-    const message="¡Hola! Quiero crear mi usuario y obtener mi bono del 50% de Gold Clover 🍀💰";
-    const whatsappURL=`https://wa.me/${phoneNumber.replace('+','')}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL,'_blank');
-}
+// Notificaciones
+const winners=[{name:"María González",amount:"$45,230",location:"Buenos Aires",avatar:"👩"},{name:"Carlos Mendoza",amount:"$67,890",location:"Córdoba",avatar:"👨"},{name:"Ana Rodríguez",amount:"$23,450",location:"Rosario",avatar:"👩"},{name:"Diego López",amount:"$89,120",location:"Mendoza",avatar:"👨"},{name:"Laura Martín",amount:"$34,670",location:"La Plata",avatar:"👩"},{name:"Roberto Silva",amount:"$56,340",location:"Tucumán",avatar:"👨"},{name:"Patricia Morales",amount:"$78,210",location:"Salta",avatar:"👩"},{name:"Fernando Castro",amount:"$42,580",location:"Mar del Plata",avatar:"👨"},{name:"Gabriela Ruiz",amount:"$91,760",location:"Santa Fe",avatar:"👩"},{name:"Miguel Torres",amount:"$38,940",location:"Neuquén",avatar:"👨"}];
+let currentWinnerIndex=0;
+function showWinnerNotification(){ const winner=winners[currentWinnerIndex]; const notification=document.createElement('div'); notification.className='winner-notification'; notification.innerHTML=`<div class="notification-header"><div class="notification-icon">🎉</div><div class="notification-title">¡Nuevo Ganador!</div></div><div class="notification-info"><div class="notification-avatar">${winner.avatar}</div><div class="notification-details"><h3>${winner.name}</h3><div class="notification-amount">🏆 Ganó ${winner.amount}</div><div class="notification-location">📍 ${winner.location}</div></div></div>`; document.getElementById('winner-notifications').appendChild(notification); setTimeout(()=>{if(notification.parentNode) notification.parentNode.removeChild(notification);},6000); currentWinnerIndex=(currentWinnerIndex+1)%winners.length;}
 
 // Inicialización
 let particleSystem;
-
-window.addEventListener('load',()=>{
-    // Inicializar Facebook tracking
-    initializeFacebookTracking();
-    
-    // Crear sistema de partículas optimizado
-    particleSystem = new ParticleSystem();
-    particleSystem.init();
-    
-    // Inicializar notificaciones de ganadores
-    setTimeout(showWinnerNotification, 3000);
-    setInterval(showWinnerNotification, 8000);
-});
-
-// Pausar partículas cuando la página no está visible (optimización adicional)
-document.addEventListener('visibilitychange', () => {
-    if (particleSystem) {
-        if (document.hidden) {
-            particleSystem.stop();
-        } else {
-            particleSystem.start();
-        }
-    }
-});
+window.addEventListener('load',()=>{ initializeFacebookTracking(); particleSystem=new ParticleSystem(); particleSystem.init(); setTimeout(showWinnerNotification,3000); setInterval(showWinnerNotification,8000); });
+document.addEventListener('visibilitychange',()=>{ if(particleSystem){ document.hidden?particleSystem.stop():particleSystem.start(); } });
 </script>
 
-<!-- Noscript para Facebook Pixel -->
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
-/></noscript>
-
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
 </body>
 </html>

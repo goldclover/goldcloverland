@@ -13,15 +13,16 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     background: linear-gradient(45deg, #0d0415, #1a0b2e, #2d1b4e, #3f2860);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
-    min-height:100vh;
+    height:100vh;
     position:relative;
+    overflow:hidden; /* evita scroll por partículas */
 }
 @keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 
 /* Partículas doradas */
-.particles { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
+.particles { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; }
 .particle { position:absolute; width:4px; height:4px; background: linear-gradient(45deg,#ffd700,#ffed4e); border-radius:50%; animation: float 6s infinite linear; opacity:0.8; }
-@keyframes float { 0% { transform:translateY(100vh) rotate(0deg); opacity:0; } 10% { opacity:0.8; } 90% { opacity:0.8; } 100% { transform:translateY(-10px) rotate(360deg); opacity:0; } }
+@keyframes float { 0% { transform:translateY(100%) rotate(0deg); opacity:0; } 10% { opacity:0.8; } 90% { opacity:0.8; } 100% { transform:translateY(-10%) rotate(360deg); opacity:0; } }
 
 /* Contenedor principal sin scroll */
 .container { position:relative; z-index:10; padding:10px 20px; text-align:center; height:100vh; display:flex; flex-direction:column; justify-content:space-between; }
@@ -67,7 +68,16 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
 .winner-notification .notification-location { color:#fffa65; }
 
 /* Bonus */
-.bonus-section { background: linear-gradient(135deg,#ff4757,#ff6b7a); padding:20px 15px; margin-top:10px; position:relative; overflow:hidden; }
+    
+.bonus-section {
+    width: 100%; /* ocupa todo el ancho */
+    max-width: 100%; /* aseguramos que no haya límite */
+    background: linear-gradient(135deg,#ff4757,#ff6b7a);
+    padding: 20px 15px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
 .bonus-section::before { content:'🎉'; position:absolute; font-size:2rem; animation:bounce 2s infinite; top:5px; left:5px; }
 .bonus-section::after { content:'🎉'; position:absolute; font-size:2rem; animation:bounce 2s infinite 0.5s; top:5px; right:5px; }
 .bonus-header { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:5px; text-shadow:2px 2px 4px rgba(0,0,0,0.5); }

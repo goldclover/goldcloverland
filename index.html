@@ -5,92 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gold Clover - ¡Obtén tu Bono Ahora!</title>
 <style>
-/* --- Pie de página fijo --- */
-.bonus-section,
-.promo-text {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-    z-index: 20;
-    box-sizing: border-box;
+/* Reset básico */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
+
+/* Fondo animado oscuro */
+.background {
+    background: linear-gradient(45deg, #0d0415, #1a0b2e, #2d1b4e, #3f2860);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+@keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+/* Partículas doradas optimizadas */
+.particles { 
+    position:fixed; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100vh; 
+    pointer-events:none; 
+    overflow:hidden;
+    z-index:2;
+}
+.particle { 
+    position:absolute; 
+    width:3px; 
+    height:3px; 
+    background: #ffd700; 
+    border-radius:50%; 
+    opacity:0;
+    will-change: transform, opacity;
 }
 
-/* Ajuste de bonus y promo para que no se solapen */
-.bonus-section { 
-    padding: 15px 10px; 
-}
-.promo-text { 
-    padding: 15px 10px; 
-    margin-bottom: 80px; /* dejar espacio para bonus-section */
-}
-
-/* --- Notificaciones de ganadores --- */
-.notification-container {
-    position: fixed;
-    bottom: 120px; /* sobre los contenedores fijos */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95%;
-    max-width: 400px;
-    z-index: 30;
-    pointer-events: none; /* no bloquea clicks */
+/* Contenedor principal */
+.container {
+    position:relative; 
+    z-index:10; 
+    padding:10px 20px; 
+    text-align:center; 
+    height:calc(100vh - 280px); 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:flex-start; 
 }
 
-/* Notificación individual con recuadro y colores */
-.winner-notification {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.95));
-    border: 2px solid #ffd700;
-    border-radius: 12px;
-    padding: 10px 15px;
-    color: #fff;
-    font-size: 0.9rem;
-    margin: 5px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideInOut 6s ease-in-out forwards;
+/* Título */
+.title { 
+    font-size:3rem; 
+    font-weight:900; 
+    color:#ffd700; 
+    text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); 
+    letter-spacing:2px; 
+    animation: glow 2s ease-in-out infinite alternate; 
+    position:relative; 
+    margin-top:20px; 
+    line-height:1.2;
+}
+.title::before { content:'🍀'; position:absolute; left:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite; }
+.title::after { content:'🍀'; position:absolute; right:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite reverse; }
+@keyframes glow { from { text-shadow:0 0 8px #ffd700,0 0 16px #ffd700,2px 2px 4px rgba(0,0,0,0.5); } to { text-shadow:0 0 12px #ffd700,0 0 20px #ffed4e,2px 2px 4px rgba(0,0,0,0.5); } }
+@keyframes rotate { from {transform:translateY(-50%) rotate(0deg);} to {transform:translateY(-50%) rotate(360deg);} }
+
+/* Descripción */
+.middle-section { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.description { 
+    font-size:1.5rem; 
+    background:linear-gradient(45deg,#fff,#ffd700,#ffed4e,#fff); 
+    background-size:300% 300%; 
+    background-clip:text; 
+    -webkit-background-clip:text; 
+    -webkit-text-fill-color:transparent; 
+    animation:textGradient 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate; 
+    font-weight:800; 
+    line-height:1.3; 
+    text-align:center; 
+    text-shadow:0 0 15px rgba(255,215,0,0.5); 
+    margin-bottom:10px; 
+}
+@keyframes textGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+@keyframes textGlow { from {text-shadow:0 0 10px rgba(255,215,0,0.5);} to {text-shadow:0 0 20px rgba(255,215,0,0.8);} }
+
+/* Botón principal */
+.cta-button { 
+    background: linear-gradient(45deg, #ff4e50, #f9d423); 
+    background-size:200% 200%; 
+    border:none; 
+    padding:18px 35px; 
+    font-size:1.4rem; 
+    font-weight:900; 
+    color:#000; 
+    border-radius:50px; 
+    cursor:pointer; 
+    text-transform:uppercase; 
+    letter-spacing:1px; 
+    box-shadow:0 8px 20px rgba(255,94,94,0.4), inset 0 2px 4px rgba(255,255,255,0.3); 
+    transition: all 0.3s ease; 
+    animation:pulse 2s infinite, gradientMove 3s ease infinite; 
+    margin:10px 0; 
+}
+.cta-button:hover { transform:scale(1.05); box-shadow:0 12px 30px rgba(255,94,94,0.6), inset 0 2px 4px rgba(255,255,255,0.4); }
+.cta-button:active { transform:scale(0.95); }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+@keyframes gradientMove { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+/* Verificación */
+.verification { display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; font-weight:600; margin:10px 0; text-shadow:1px 1px 2px rgba(0,0,0,0.7); }
+.verification::before,.verification::after { content:'✅'; margin:0 5px; animation:bounce 2s infinite; }
+@keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
 }
 
-/* Avatar */
-.winner-notification .notification-avatar {
-    font-size: 2rem;
-    margin-right: 10px;
-}
+/* Notificaciones */
+.notification-container { width:100%; max-width:400px; height:180px; overflow:visible; position:relative; margin:10px auto; }
+.winner-notification { position:absolute; top:0; left:50%; transform:translateX(-50%); width:95%; max-width:400px; background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.95)); padding:15px 20px; border-radius:15px; border:2px solid #ffd700; box-shadow:0 10px 30px rgba(0,0,0,0.8),0 0 20px rgba(255,215,0,0.3); animation: slideInOut 6s ease-in-out; color:#fff; font-size:0.9rem; z-index:15;}
+.winner-notification h3 { color:#ffd700; font-size:1rem; margin-bottom:2px; }
+.winner-notification .notification-amount { color:#00ffcc; font-weight:700; }
+.winner-notification .notification-location { color:#fffa65; }
 
-/* Detalles */
-.winner-notification .notification-details h3 {
-    color: #ffd700;
-    font-size: 1rem;
-    margin-bottom: 2px;
+/* Bonus y Promo fijos al pie */
+.bonus-section, .promo-text {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    left:0;
+    z-index:10;
+    box-sizing:border-box;
 }
-.winner-notification .notification-amount {
-    color: #00ffcc;
-    font-weight: 700;
-}
-.winner-notification .notification-location {
-    color: #fffa65;
-    font-size: 0.85rem;
-}
+.bonus-section { background: linear-gradient(135deg,#ff4757,#ff6b7a); padding:20px 15px; text-align:center; }
+.bonus-header { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:5px; text-shadow:2px 2px 4px rgba(0,0,0,0.5); }
+.bonus-percentage { font-size:2.5rem; font-weight:900; color:#fff; text-shadow:3px 3px 6px rgba(0,0,0,0.5); margin:5px 0; animation:pulse 2s infinite; }
+.bonus-description { color:#fff; font-size:1rem; font-weight:600; text-shadow:1px 1px 2px rgba(0,0,0,0.5); }
 
-/* Animación suave */
-@keyframes slideInOut {
-    0% { opacity: 0; transform: translateY(20px); }
-    10%, 80% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(20px); }
-}
+.promo-text { background: linear-gradient(135deg, #000000, #1a1a1a, #333333); background-size: 200% 200%; animation: darkGradientMove 4s ease infinite; padding:25px 15px; text-align:center; border-top:3px solid #ffd700; box-shadow: inset 0 5px 15px rgba(255, 215, 0, 0.2); }
+.promo-text .highlight { font-size: 1.3rem; font-weight: 900; color: #ffd700; text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8); animation: intensePulse 1.5s ease-in-out infinite; letter-spacing:1px; }
+.promo-text .promo-main { font-size:1.1rem; font-weight:700; color:#fff; text-shadow:1px 1px 3px rgba(0,0,0,0.7); display:inline-block; margin:8px 0; line-height:1.4; }
+.promo-text .promo-sub { font-size:1rem; font-weight:600; background: linear-gradient(45deg, #ff6b35, #f9ca24, #ff6b35); background-size:200% 200%; background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: fireGradient 2s ease infinite; text-shadow:none; }
+
+/* Animaciones */
+@keyframes darkGradientMove { 0%, 100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+@keyframes intensePulse { 0%, 100% { transform: scale(1); text-shadow: 0 0 10px #ffd700, 2px 2px 4px rgba(0,0,0,0.8); } 50% { transform: scale(1.08); text-shadow: 0 0 20px #ffd700, 0 0 30px #ffed4e, 2px 2px 4px rgba(0,0,0,0.8); } }
+@keyframes fireGradient { 0%, 100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
 
 /* Responsivo */
 @media (max-width:480px){
-    .winner-notification { flex-direction: column; align-items: flex-start; font-size: 0.8rem; padding: 8px; }
-    .winner-notification .notification-avatar { font-size: 1.5rem; margin-bottom: 5px; }
-    .winner-notification .notification-details h3 { font-size: 0.9rem; }
-    .winner-notification .notification-amount { font-size: 0.85rem; }
-    .winner-notification .notification-location { font-size: 0.75rem; }
+    .container { height:auto; min-height:calc(100vh - 200px); justify-content:flex-start; padding:10px 15px; }
+    .title{font-size:2rem;margin-top:20px; line-height:1.2;}
+    .title::before,.title::after{display:none;}
+    .description{font-size:1.2rem;margin:10px 0;}
+    .cta-button{padding:14px 25px;font-size:1rem;}
+    .winner-notification{font-size:0.8rem;padding:10px;}
+    .bonus-percentage{font-size:2rem;}
+    .bonus-header{font-size:1rem;}
+    .bonus-description{font-size:0.9rem;}
+    .promo-text .highlight{font-size:1.1rem;}
+    .promo-text .promo-main{font-size:1rem;}
+    .promo-text .promo-sub{font-size:0.9rem;}
 }
-
 </style>
 </head>
 <body>
@@ -128,10 +204,10 @@
 function initializeFacebookTracking(){
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)}; 
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; 
+    n.queue=[];t=b.createElement(e);t.async=!0; 
+    t.src=v;s=b.getElementsByTagName(e)[0]; 
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','24403633855955337');
@@ -162,11 +238,25 @@ function redirectToWhatsApp(){ const phoneNumber="5491125459137"; const message=
 // Notificaciones
 const winners=[{name:"María González",amount:"$45,230",location:"Buenos Aires",avatar:"👩"},{name:"Carlos Mendoza",amount:"$67,890",location:"Córdoba",avatar:"👨"},{name:"Ana Rodríguez",amount:"$23,450",location:"Rosario",avatar:"👩"},{name:"Diego López",amount:"$89,120",location:"Mendoza",avatar:"👨"},{name:"Laura Martín",amount:"$34,670",location:"La Plata",avatar:"👩"},{name:"Roberto Silva",amount:"$56,340",location:"Tucumán",avatar:"👨"},{name:"Patricia Morales",amount:"$78,210",location:"Salta",avatar:"👩"},{name:"Fernando Castro",amount:"$42,580",location:"Mar del Plata",avatar:"👨"},{name:"Gabriela Ruiz",amount:"$91,760",location:"Santa Fe",avatar:"👩"},{name:"Miguel Torres",amount:"$38,940",location:"Neuquén",avatar:"👨"}];
 let currentWinnerIndex=0;
-function showWinnerNotification(){ const winner=winners[currentWinnerIndex]; const notification=document.createElement('div'); notification.className='winner-notification'; notification.innerHTML=`<div class="notification-header"><div class="notification-icon">🎉</div><div class="notification-title">¡Nuevo Ganador!</div></div><div class="notification-info"><div class="notification-avatar">${winner.avatar}</div><div class="notification-details"><h3>${winner.name}</h3><div class="notification-amount">🏆 Ganó ${winner.amount}</div><div class="notification-location">📍 ${winner.location}</div></div></div>`; document.getElementById('winner-notifications').appendChild(notification); setTimeout(()=>{if(notification.parentNode) notification.parentNode.removeChild(notification);},6000); currentWinnerIndex=(currentWinnerIndex+1)%winners.length;}
+function showWinnerNotification(){ 
+    const winner=winners[currentWinnerIndex]; 
+    const notification=document.createElement('div'); 
+    notification.className='winner-notification'; 
+    notification.innerHTML=`<div class="notification-header"><div class="notification-icon">🎉</div><div class="notification-title">¡Nuevo Ganador!</div></div><div class="notification-info"><div class="notification-avatar">${winner.avatar}</div><div class="notification-details"><h3>${winner.name}</h3><div class="notification-amount">🏆 Ganó ${winner.amount}</div><div class="notification-location">📍 ${winner.location}</div></div></div>`; 
+    document.getElementById('winner-notifications').appendChild(notification); 
+    setTimeout(()=>{if(notification.parentNode) notification.parentNode.removeChild(notification);},6000); 
+    currentWinnerIndex=(currentWinnerIndex+1)%winners.length;
+}
 
 // Inicialización
 let particleSystem;
-window.addEventListener('load',()=>{ initializeFacebookTracking(); particleSystem=new ParticleSystem(); particleSystem.init(); setTimeout(showWinnerNotification,3000); setInterval(showWinnerNotification,8000); });
+window.addEventListener('load',()=>{
+    initializeFacebookTracking(); 
+    particleSystem=new ParticleSystem(); 
+    particleSystem.init(); 
+    setTimeout(showWinnerNotification,3000); 
+    setInterval(showWinnerNotification,8000); 
+});
 document.addEventListener('visibilitychange',()=>{ if(particleSystem){ document.hidden?particleSystem.stop():particleSystem.start(); } });
 </script>
 

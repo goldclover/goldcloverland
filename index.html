@@ -70,13 +70,15 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
 /* Bonus */
     
 .bonus-section {
-    width: 100%; /* ocupa todo el ancho */
-    max-width: 100%; /* aseguramos que no haya límite */
-    background: linear-gradient(135deg,#ff4757,#ff6b7a);
+    width: calc(100% + 40px); /* ocupa todo el ancho del viewport */
+    max-width: 100%;
+    margin: 0 -20px 10px -20px; /* elimina el padding del container */
     padding: 20px 15px;
-    margin-top: 10px;
+    background: linear-gradient(135deg,#ff4757,#ff6b7a);
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 0; /* opcional, para que ocupe todo el ancho */
 }
 .bonus-section::before { content:'🎉'; position:absolute; font-size:2rem; animation:bounce 2s infinite; top:5px; left:5px; }
 .bonus-section::after { content:'🎉'; position:absolute; font-size:2rem; animation:bounce 2s infinite 0.5s; top:5px; right:5px; }

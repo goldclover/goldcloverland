@@ -38,7 +38,7 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
     font-size:3rem; font-weight:900; color:#ffd700; text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 2px 2px 4px rgba(0,0,0,0.5); 
     letter-spacing:2px; animation: glow 2s ease-in-out infinite alternate; position:relative; margin-top:10px; 
 }
-.title::before { content:'🍀'; position:absolute; left:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite; }
+.title::before { content:'🍀'; position:absolute; left:-50px; top:; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite; }
 .title::after { content:'🍀'; position:absolute; right:-50px; top:50%; transform:translateY(-50%); font-size:2rem; animation:rotate 3s linear infinite reverse; }
 @keyframes glow { from { text-shadow:0 0 8px #ffd700,0 0 16px #ffd700,2px 2px 4px rgba(0,0,0,0.5); } to { text-shadow:0 0 12px #ffd700,0 0 20px #ffed4e,2px 2px 4px rgba(0,0,0,0.5); } }
 @keyframes rotate { from {transform:translateY(-50%) rotate(0deg);} to {transform:translateY(-50%) rotate(360deg);} }
@@ -150,7 +150,7 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; }
         <div class="promo-text">
             <div class="promo-content">
                 ⚡ <span class="highlight">¡OFERTA LIMITADA!</span> ⚡<br>
-                <span class="promo-main">50% EXTRA BONIFICADO EN TU PRIMER DEPÓSITO</span><br>
+                <span class="promo-main">30% EXTRA BONIFICADO EN TU PRIMER DEPÓSITO</span><br>
                 <span class="promo-sub">🔥 Solo por tiempo limitado - ¡No te quedes sin el tuyo! 🔥</span>
             </div>
         </div>
@@ -191,7 +191,7 @@ class ParticleSystem{
 
 // BOTON
 function handleButtonClick(){ trackConversion('lead'); trackConversion('initiate_checkout'); setTimeout(()=>{redirectToWhatsApp();},100);}
-function redirectToWhatsApp(){ const phoneNumber="5491125459137"; const message="¡Hola! Quiero crear mi usuario y obtener mi bono del 50% de Gold Clover 🍀💰"; window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,'_blank');}
+function redirectToWhatsApp(){ const phoneNumber="5491125459137"; const message="¡Hola! Quiero crear mi usuario y obtener mi bono🍀💰"; window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,'_blank');}
 
 // NOTIFICACIONES
 const winners=[{name:"María González",amount:"$45,230",location:"Buenos Aires",avatar:"👩"},{name:"Carlos Mendoza",amount:"$67,890",location:"Córdoba",avatar:"👨"},{name:"Ana Rodríguez",amount:"$23,450",location:"Rosario",avatar:"👩"},{name:"Diego López",amount:"$89,120",location:"Mendoza",avatar:"👨"},{name:"Laura Martín",amount:"$34,670",location:"La Plata",avatar:"👩"},{name:"Roberto Silva",amount:"$56,340",location:"Tucumán",avatar:"👨"},{name:"Patricia Morales",amount:"$78,210",location:"Salta",avatar:"👩"},{name:"Fernando Castro",amount:"$42,580",location:"Mar del Plata",avatar:"👨"},{name:"Gabriela Ruiz",amount:"$91,760",location:"Santa Fe",avatar:"👩"},{name:"Miguel Torres",amount:"$38,940",location:"Neuquén",avatar:"👨"}];

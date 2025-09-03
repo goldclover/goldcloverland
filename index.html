@@ -3,45 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gold Clover - ¡Activá tu Beneficio!</title>
+<title>Gold Clover - Activá tu Beneficio</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; background: linear-gradient(45deg, #0d0415, #1a0b2e, #2d1b4e, #3f2860); background-size: 400% 400%; animation: gradientShift 8s ease infinite; height:100vh; display:flex; justify-content:center; align-items:center; text-align:center; color:#fff; }
 
-/* --- PARTICULAS --- */
+@keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+/* PARTICULAS */
 .particles { position:fixed; top:0; left:0; width:100%; height:100vh; pointer-events:none; overflow:hidden; z-index:1; }
 .particle { position:absolute; width:3px; height:3px; background:#ffd700; border-radius:50%; opacity:0; }
 
-/* --- CONTENEDOR PRINCIPAL --- */
+/* CONTENEDOR PRINCIPAL */
 .container { position:relative; z-index:2; padding:20px; max-width:400px; width:90%; display:flex; flex-direction:column; justify-content:center; align-items:center; }
 
-/* --- TITULO --- */
-.title { font-size:3rem; font-weight:900; color:#ffd700; text-shadow:0 0 8px #ffd700, 0 0 16px #ffd700; animation: glow 2s ease-in-out infinite alternate; margin-bottom:15px; }
-@keyframes glow { from {text-shadow:0 0 8px #ffd700,0 0 16px #ffd700;} to {text-shadow:0 0 12px #ffd700,0 0 20px #ffed4e;} }
+/* LOGO */
+.logo { width:150px; height:auto; margin-bottom:15px; }
 
-/* --- DESCRIPCION --- */
+/* DESCRIPCION */
 .description { font-size:1.4rem; font-weight:700; line-height:1.3; text-shadow:0 0 10px rgba(255,215,0,0.5); margin-bottom:25px; }
 
-/* --- BOTON --- */
-.cta-button { background:#25D366; color:#fff; border:none; padding:18px 35px; font-size:1.2rem; font-weight:900; border-radius:50px; cursor:pointer; box-shadow:0 8px 20px rgba(37,211,102,0.4); transition:0.3s; text-transform:uppercase; animation:pulse 2s infinite; position:relative; }
+/* BOTON */
+.cta-button { background:#25D366; color:#fff; border:none; padding:18px 35px; font-size:1.2rem; font-weight:900; border-radius:50px; cursor:pointer; box-shadow:0 8px 20px rgba(37,211,102,0.4); transition:0.3s; text-transform:uppercase; animation:pulse 2s infinite; display:flex; align-items:center; justify-content:center; position:relative; }
 .cta-button:hover { transform:scale(1.05); box-shadow:0 12px 30px rgba(37,211,102,0.6); }
 .cta-button:active { transform:scale(0.95); }
 @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
 
-/* --- MICRO URGENCIA --- */
-.urgency { font-size:1rem; color:#ffed4e; font-weight:900; margin-top:10px; text-shadow:0 0 8px rgba(255,235,0,0.8); animation:flash 1.5s infinite; }
+/* EMOJI ANIMADO */
+.emoji { font-size:1.8rem; margin-left:10px; animation:jump 1s infinite; }
+@keyframes jump { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+
+/* CONTADOR */
+.countdown { font-size:1rem; color:#ffed4e; font-weight:900; margin-top:10px; text-shadow:0 0 8px rgba(255,235,0,0.8); animation:flash 1.5s infinite; }
 @keyframes flash { 0%,100%{opacity:1;} 50%{opacity:0.6;} }
 
-/* --- NOTIFICACIONES SIMULADAS --- */
-.notification-container { width:100%; max-width:400px; height:140px; overflow:hidden; position:relative; margin:15px auto; }
-.notification { position:absolute; top:0; left:50%; transform:translateX(-50%); width:95%; max-width:400px; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(30,30,30,0.85)); padding:12px 18px; border-radius:12px; border:2px solid #ffd700; box-shadow:0 8px 20px rgba(0,0,0,0.8),0 0 15px rgba(255,215,0,0.3); animation:slideInOut 6s ease-in-out; color:#fff; font-size:0.9rem; text-align:left;}
-.notification h4 { color:#ffd700; font-size:1rem; margin-bottom:2px; font-weight:700; }
-.notification p { font-size:0.85rem; color:#fff; }
+/* NOTIFICACIONES SCROLL */
+.notification-container { width:100%; max-width:400px; height:40px; overflow:hidden; position:relative; margin:15px auto; border-radius:10px; }
+.notification-scroll { position:absolute; white-space:nowrap; display:flex; animation:scrollLeft 12s linear infinite; font-size:0.9rem; color:#fff; }
+.notification-scroll div { margin-right:40px; display:inline-flex; align-items:center; }
+.notification-scroll span { color:#ffd700; font-weight:700; margin-left:5px; }
 
-@keyframes slideInOut { 0% { opacity:0; transform:translateX(-50%) translateY(-20px);} 10%,90% { opacity:1; transform:translateX(-50%) translateY(0);} 100% { opacity:0; transform:translateX(-50%) translateY(20px);} }
+@keyframes scrollLeft { 0%{transform:translateX(100%);} 100%{transform:translateX(-100%);} }
 
 /* RESPONSIVO */
-@media(max-width:480px){ .title{font-size:2rem;} .description{font-size:1.1rem;} .cta-button{padding:14px 25px; font-size:1rem;} .urgency{font-size:0.9rem;} .notification{font-size:0.75rem; padding:10px;} }
+@media(max-width:480px){ .description{font-size:1.1rem;} .cta-button{padding:14px 25px; font-size:1rem;} .countdown{font-size:0.9rem;} .notification-scroll{font-size:0.75rem;} }
 </style>
 </head>
 <body>
@@ -49,11 +54,24 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; backg
 <div class="particles" id="particles"></div>
 
 <div class="container">
-    <h1 class="title">Gold Clover 🍀</h1>
+    <!-- LOGO -->
+    <img src="https://yourdomain.com/logo.png" alt="Gold Clover" class="logo">
+
     <p class="description">¡Tu beneficio exclusivo te espera!<br>Solo un paso más para activarlo.</p>
-    <button class="cta-button" onclick="redirectToWhatsApp()">Activar mi beneficio</button>
-    <div class="urgency">⏰ ¡Solo por tiempo limitado!</div>
-    <div class="notification-container" id="notification-container"></div>
+    
+    <!-- BOTON CON EMOJI -->
+    <button class="cta-button" onclick="redirectToWhatsApp()">
+        Activar mi beneficio
+        <span class="emoji">🍀</span>
+    </button>
+
+    <!-- CONTADOR -->
+    <div class="countdown" id="countdown">⏰ Solo disponible por 00:05:00</div>
+
+    <!-- NOTIFICACIONES SCROLL -->
+    <div class="notification-container">
+        <div class="notification-scroll" id="notification-scroll"></div>
+    </div>
 </div>
 
 <script>
@@ -77,26 +95,30 @@ function redirectToWhatsApp(){
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,'_blank');
 }
 
-// Notificaciones simuladas
-const notifications = [
-    {title:"María", text:"activó su beneficio recientemente."},
-    {title:"Carlos", text:"participó y recibió su ventaja."},
-    {title:"Ana", text:"desbloqueó su beneficio exclusivo."},
-    {title:"Diego", text:"activó su ventaja con éxito."},
-    {title:"Laura", text:"participó y obtuvo su recompensa."}
-];
-let notifIndex=0;
-function showNotification(){
-    const notifContainer = document.getElementById('notification-container');
-    const notif = document.createElement('div');
-    notif.className='notification';
-    notif.innerHTML=`<h4>${notifications[notifIndex].title}</h4><p>${notifications[notifIndex].text}</p>`;
-    notifContainer.appendChild(notif);
-    setTimeout(()=>{ if(notif.parentNode) notif.parentNode.removeChild(notif); },6000);
-    notifIndex=(notifIndex+1)%notifications.length;
+// CONTADOR EN TIEMPO REAL
+let countdownTime = 5*60; // 5 minutos en segundos
+function updateCountdown(){
+    let minutes = Math.floor(countdownTime/60).toString().padStart(2,'0');
+    let seconds = (countdownTime%60).toString().padStart(2,'0');
+    document.getElementById('countdown').textContent = `⏰ Solo disponible por 00:${minutes}:${seconds}`;
+    if(countdownTime>0){ countdownTime--; setTimeout(updateCountdown,1000); }
 }
-setInterval(showNotification, 8000);
-setTimeout(showNotification,3000);
+updateCountdown();
+
+// NOTIFICACIONES SCROLL
+const notifications = [
+    {name:"María", action:"activó su beneficio"},
+    {name:"Carlos", action:"participó y recibió su ventaja"},
+    {name:"Ana", action:"desbloqueó su beneficio exclusivo"},
+    {name:"Diego", action:"activó su ventaja con éxito"},
+    {name:"Laura", action:"participó y obtuvo su recompensa"}
+];
+const notifContainer = document.getElementById('notification-scroll');
+notifications.forEach(n=>{ 
+    const div = document.createElement('div'); 
+    div.innerHTML=`🎉 ${n.name} <span>${n.action}</span>`; 
+    notifContainer.appendChild(div); 
+});
 
 // Facebook Pixel (ejemplo)
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[]; t=b.createElement(e);t.async=!0; t.src=v; s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');

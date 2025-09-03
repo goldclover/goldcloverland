@@ -41,7 +41,7 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; backg
 .notification-container { width:100%; max-width:400px; height:40px; overflow:hidden; position:relative; margin:15px auto; border-radius:10px; }
 .notification-scroll { position:absolute; white-space:nowrap; display:flex; animation:scrollLeft 12s linear infinite; font-size:0.9rem; color:#fff; }
 .notification-scroll div { margin-right:40px; display:inline-flex; align-items:center; }
-.notification-scroll span { color:#ffd700; font-weight:700; margin-left:5px; }
+.notification-scroll span { color:#ffd700; font-weight:700; }
 
 @keyframes scrollLeft { 0%{transform:translateX(100%);} 100%{transform:translateX(-100%);} }
 
@@ -55,12 +55,12 @@ body { font-family:'Arial',sans-serif; overflow:hidden; position:relative; backg
 
 <div class="container">
     <!-- LOGO -->
-    <img src="https://yourdomain.com/logo.png" alt="Gold Clover" class="logo">
+    <img src="https://goldcloverlanding.netlify.app/logo.png" alt="Gold Clover" class="logo">
 
     <p class="description">¡Tu beneficio exclusivo te espera!<br>Solo un paso más para activarlo.</p>
     
     <!-- BOTON CON EMOJI -->
-    <button class="cta-button" onclick="redirectToWhatsApp()">
+    <button class="cta-button" onclick="handleButtonClick()">
         Activar mi beneficio
         <span class="emoji">🍀</span>
     </button>
@@ -88,15 +88,29 @@ let particleSystem = new ParticleSystem();
 window.addEventListener('load',()=>{ particleSystem.init(); });
 document.addEventListener('visibilitychange',()=>{ if(particleSystem){ document.hidden?particleSystem.stop():particleSystem.start(); } });
 
-// WhatsApp API
-function redirectToWhatsApp(){
+// WhatsApp + CAPI
+function handleButtonClick(){
+    const data = {
+        email: '', // opcional
+        phone: '5491125459137',
+        eventName: 'Lead',
+        pageUrl: window.location.href
+    };
+
+    fetch('/.netlify/functions/capi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(console.log);
+
+    // Abrir WhatsApp
     const phoneNumber="5491125459137";
     const message="¡Hola! Quiero activar mi beneficio 🍀";
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,'_blank');
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 // CONTADOR EN TIEMPO REAL
-let countdownTime = 5*60; // 5 minutos en segundos
+let countdownTime = 5*60; // 5 minutos
 function updateCountdown(){
     let minutes = Math.floor(countdownTime/60).toString().padStart(2,'0');
     let seconds = (countdownTime%60).toString().padStart(2,'0');
@@ -120,13 +134,12 @@ notifications.forEach(n=>{
     notifContainer.appendChild(div); 
 });
 
-// Facebook Pixel (ejemplo)
+// Pixel (opcional)
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[]; t=b.createElement(e);t.async=!0; t.src=v; s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','PIXEL_ID'); // reemplazar con tu Pixel ID
+fbq('init','24403633855955337'); // reemplazar con tu Pixel ID
 fbq('track','PageView');
-</script>
 
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+</script>
 
 </body>
 </html>

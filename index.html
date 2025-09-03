@@ -91,8 +91,8 @@ document.addEventListener('visibilitychange',()=>{ if(particleSystem){ document.
 // WhatsApp + CAPI
 function handleButtonClick(){
     const data = {
-        email: '', // opcional
-        phone: '5491125459137',
+        email: '', 
+        phone: '5491125379784',
         eventName: 'Lead',
         pageUrl: window.location.href
     };
@@ -104,13 +104,13 @@ function handleButtonClick(){
     }).then(res => res.json()).then(console.log);
 
     // Abrir WhatsApp
-    const phoneNumber="5491125459137";
+    const phoneNumber="5491125379784";
     const message="¡Hola! Quiero activar mi beneficio 🍀";
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 // CONTADOR EN TIEMPO REAL
-let countdownTime = 5*60; // 5 minutos
+let countdownTime = 5*60; 
 function updateCountdown(){
     let minutes = Math.floor(countdownTime/60).toString().padStart(2,'0');
     let seconds = (countdownTime%60).toString().padStart(2,'0');
@@ -134,9 +134,9 @@ notifications.forEach(n=>{
     notifContainer.appendChild(div); 
 });
 
-// Pixel (opcional)
+// Pixel de frontend
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[]; t=b.createElement(e);t.async=!0; t.src=v; s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','24403633855955337'); // reemplazar con tu Pixel ID
+fbq('init','24403633855955337'); 
 fbq('track','PageView');
 
 </script>
